@@ -1,0 +1,54 @@
+<div class="login-form">
+  <header>
+    <h1>Welcome</h1>
+    Please login to continue
+  </header>
+
+  <div class="login-item">
+    <form #loginForm="ngForm" (ngSubmit)="handler(loginForm)" novalidate>
+      <div class="form-field">
+        <label class="user" for="login-username"> Username* </label>
+        <input
+          name="username"
+          type="text"
+          class="form-control"
+          placeholder="Username*"
+          pattern="[a-zA-Z]+$"
+          required
+          ngModel
+          #username="ngModel"
+        />
+        <div *ngIf="username.invalid && username.touched" class="error">
+          Please enter a valid username
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="lock" for="login-password"> Password* </label>
+        <input
+          name="password"
+          type="password"
+          class="form-control"
+          placeholder="Password*"
+          required
+          ngModel
+          #password="ngModel"
+        />
+        <div *ngIf="password.invalid && password.touched" class="error">
+          Please enter your password
+        </div>
+      </div>
+      <div class="form-field">
+        <button
+          id="submit-btn"
+          class="btn"
+          type="submit"
+          [disabled]="loginForm.invalid"
+        >
+          Login
+        </button>
+      </div>
+    </form>
+    <hr />
+    <p>Don't have an account? <a href="#">Sign up!</a></p>
+  </div>
+</div>
