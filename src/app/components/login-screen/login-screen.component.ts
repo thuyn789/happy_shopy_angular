@@ -1,3 +1,4 @@
+import { FirebaseAuthService } from './../../services/auth/firebase-auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
@@ -9,18 +10,33 @@ import { NgForm } from '@angular/forms';
 export class LoginScreenComponent implements OnInit {
   private username!: string;
   private password!: string;
+  private userObj?: any;
+  isUserLoggedIn = false;
 
-  constructor() {}
+  constructor(private fireAuth: FirebaseAuthService) {}
 
   ngOnInit(): void {}
 
-  login(): void {
-    console.log(this.username);
-    console.log(this.password);
-    console.log('Login Successfully');
+  async login() {
+    await this.fireAuth.userLogin(this.username, this.password);
+
+    if (localStorage.getItem('fireUser') !== null) {
+      this.userObj = JSON.parse(localStorage.getItem('fireUser')!);
+
+      console.log(this.userObj);
+      console.log(this.userObj.uid);
+      console.log(this.userObj.email);
+
+      this.isUserLoggedIn = this.fireAuth.isUserLoggedIn;
+      console.log(this.isUserLoggedIn);
+
+      this.fireAuth.logout();
+    } else {
+      this.isUserLoggedIn = false;
+    }
   }
 
-  handler(form: NgForm): void {
+  async handler(form: NgForm) {
     if (form.value == null) {
       return;
     }
@@ -30,6 +46,6 @@ export class LoginScreenComponent implements OnInit {
     this.username = form.value.username;
     this.password = form.value.password;
 
-    this.login();
+    await this.login();
   }
 }
