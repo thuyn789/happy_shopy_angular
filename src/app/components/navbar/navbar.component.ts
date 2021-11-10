@@ -18,5 +18,6 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.fireAuth.logout();
+    window.location.reload();
   }
 }

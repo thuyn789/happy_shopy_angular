@@ -15,14 +15,17 @@ export class LoginScreenComponent implements OnInit {
 
   constructor(private fireAuth: FirebaseAuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (localStorage.getItem('fireUser') !== null) {
+      window.location.href = '/home';
+    }
+  }
 
   async login() {
     await this.fireAuth.userLogin(this.username, this.password);
 
     if (localStorage.getItem('fireUser') !== null) {
       this.userObj = JSON.parse(localStorage.getItem('fireUser')!);
-
       console.log(this.userObj);
       console.log(this.userObj.uid);
       console.log(this.userObj.email);
@@ -30,18 +33,15 @@ export class LoginScreenComponent implements OnInit {
       this.isUserLoggedIn = this.fireAuth.isUserLoggedIn;
       console.log(this.isUserLoggedIn);
 
-      this.fireAuth.logout();
+      //this.fireAuth.logout();
     } else {
       this.isUserLoggedIn = false;
     }
+    window.location.reload();
   }
 
   async handler(form: NgForm) {
-    if (form.value == null) {
-      return;
-    }
-
-    console.log(form.value);
+    if (form.value == null) return;
 
     this.username = form.value.username;
     this.password = form.value.password;

@@ -1,15 +1,19 @@
-<mat-toolbar color="primary">
-  <mat-icon>local_fire_department</mat-icon>
-  <span>Happy Shopy</span>
+<mat-toolbar color="primary" class="nav-bar">
+  <div>
+    <mat-icon>local_fire_department</mat-icon>
+    <span>Happy Shopy</span>
+  </div>
   <div>
     <ul>
-      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li>
+      <li class="nav-link">
+        <a routerLink="/home" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-link"><a href="#">About</a></li>
+      <li class="nav-link" *ngIf="!userObj">
         <a routerLink="/login" routerLinkActive="active">Login</a>
       </li>
-      <li>
-        <a routerLink="/login" (click)="logout()">Logout</a>
+      <li class="nav-link" *ngIf="userObj">
+        <a routerLink="/home" (click)="logout()">Logout</a>
       </li>
     </ul>
   </div>
