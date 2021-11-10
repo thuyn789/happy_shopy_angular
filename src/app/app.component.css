@@ -10,3 +10,7 @@
   height: 20vh;
   position: fixed;
 }
+
+.root-container {
+  width: 100%;
+}

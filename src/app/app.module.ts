@@ -14,6 +14,8 @@ import { HomeScreenComponent } from './components/home-screen/home-screen.compon
 import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FirebaseAuthService } from './services/auth/firebase-auth.service';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductListingComponent } from './components/product-listing/product-listing.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { FirebaseAuthService } from './services/auth/firebase-auth.service';
     NavbarComponent,
     ErrorScreenComponent,
     HomeScreenComponent,
+    ProductDetailsComponent,
+    ProductListingComponent,
   ],
   imports: [
     BrowserModule,
