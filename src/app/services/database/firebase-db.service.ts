@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
@@ -6,4 +7,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class FirebaseDBService {
   constructor(private fireDB: AngularFirestore) {}
+
+  getProducts(): Observable<any> {
+    return this.fireDB.collection('products').valueChanges();
+  }
 }
